@@ -3,7 +3,7 @@
     <h1>All Blog Articles</h1>
     <input type="text" v-model="search" placeholder="Search post"/>
     <div class="single-blog" v-for="blog in filteredBlogs">
-      <h2>{{blog.title | hurufKapital }}</h2>
+      <h2>{{blog.title | hurufBesar }}</h2>
       <article>
         {{ blog. body | snippet}}
       </article>
@@ -27,13 +27,28 @@ export default {
       this.blogs = data.body.slice(0,10);
     })
   },
-computed: {
-  filteredBlogs: function(){
-    return this.blogs.filter((blog) =>{
-      return blog.title.match(this.search);
-    });
-  }
-}
+  computed: {
+    filteredBlogs: function(){
+      return this.blogs.filter((blog) =>{
+        return blog.title.match(this.search);
+      });
+    }
+  },
+  filters: {
+    // tidak memakai function
+    // hurufBesar(data){
+    //Memakai Function
+    'hurufBesar': function(data){
+      return data.toUpperCase()
+    },
+  },
+  directives: {
+    'warnawarni':{
+      bind(el,binding,vnode){
+        el.style.color = "#" + Math.random().toString().slice(2,8)
+      }
+    },
+  },
 }
 </script>
 

@@ -4,7 +4,7 @@ import VueResource from 'vue-resource'
 //vue resource http
 Vue.use(VueResource);
 
-//======Filter===========================
+//======Custom Filter Globally============
 Vue.filter('hurufKapital',(value) =>{
   return value.toUpperCase()
 })
