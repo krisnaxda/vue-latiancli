@@ -1,10 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
-
+//vue resource http
 Vue.use(VueResource);
 
-//Custom directives
+//======Filter===========================
+Vue.filter('hurufKapital',(value) =>{
+  return value.toUpperCase()
+})
+
+Vue.filter('snippet', (data) =>{
+  return data.slice(0,100)+ "..."
+})
+
+//======Custom directives================
 Vue.directive('rainbow', {
   bind(el,binding,vnode){
     el.style.color = "#" + Math.random().toString().slice(2,8)
@@ -24,7 +33,7 @@ Vue.directive('theme', {
     }
   }
 })
-
+//========================================
 export const bus = new Vue();
 
 new Vue({
