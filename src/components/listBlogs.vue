@@ -1,12 +1,9 @@
 <template>
   <div v-theme="'narrow'" id="show-blogs">
-    <h1>All Blog Articles</h1>
+    <h1>All Blog List</h1>
     <input type="text" v-model="search" placeholder="Search post"/>
     <div class="single-blog" v-for="blog in filteredBlogs">
       <h2>{{blog.title | hurufBesar }}</h2>
-      <article>
-        {{ blog. body | snippet}}
-      </article>
     </div>
   </div>
 </template>
