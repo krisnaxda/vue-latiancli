@@ -3,9 +3,9 @@
     <h1>All Blog Articles</h1>
     <input type="text" v-model="search" placeholder="Search post"/>
     <div class="single-blog" v-for="blog in filteredBlogs">
-      <h2>{{blog.title | hurufBesar }}</h2>
+      <router-link v-bind:to="'/blog/' + blog.id"><h2>{{blog.title | hurufBesar }}</h2></router-link>
       <article>
-        {{ blog. body | snippet}}
+        {{ blog.content | snippet }}
       </article>
     </div>
   </div>
@@ -24,8 +24,15 @@ export default {
 
   },
   created() {
-    this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
-      this.blogs = data.body.slice(0,10);
+    this.$http.get('https://belajar-vue-305bd.firebaseio.com/post.json').then(function(data){
+      return data.json();
+    }).then(function(data){
+      var blogsArray = [];
+      for(let key in data){
+        data[key].id = key
+        blogsArray.push(data[key]);
+      }
+      this.blogs = blogsArray;
     })
   },
   computed: {
@@ -63,6 +70,15 @@ export default {
 }
 h2{
   font-family: montserrat;
+
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    text-decoration: none;
+    color: #444;
 }
 input{
   width:100%;
